@@ -3,11 +3,7 @@ const createButtonRef = document.querySelector("[data-create]");
 const destroyButtonRef = document.querySelector("[data-destroy]");
 const boxesRef = document.querySelector("#boxes");
 
-createButtonRef.addEventListener("click", createBoxes);
-destroyButtonRef.addEventListener("click", destroyBoxes);
-
-function createBoxes() {
-  const amount = inputRef.value;
+const createBoxes = (amount) => {
   const baseSize = 30;
   let boxes = "";
 
@@ -20,14 +16,21 @@ function createBoxes() {
   }
 
   boxesRef.innerHTML = boxes;
-}
+};
 
-function destroyBoxes() {
+const destroyBoxes = () => {
   boxesRef.innerHTML = "";
-}
+};
+
+createButtonRef.addEventListener("click", (event) => {
+  const amount = inputRef.value;
+  createBoxes(amount);
+});
+
+destroyButtonRef.addEventListener("click", destroyBoxes);
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
-    .padStart(6, "0")}`;
+    .padStart(6, 0)}`;
 }
